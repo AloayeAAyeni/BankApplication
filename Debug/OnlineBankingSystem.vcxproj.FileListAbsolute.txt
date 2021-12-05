@@ -1,0 +1,2 @@
+C:\Users\aloay\Documents\2nd year\EE2010 - Software Engineering\OnlineBankingSystem\OnlineBankingSystem\Debug\OnlineBankingSystem.exe
+C:\Users\aloay\Documents\2nd year\EE2010 - Software Engineering\OnlineBankingSystem\OnlineBankingSystem\Debug\OnlineBankingSystem.pdb
