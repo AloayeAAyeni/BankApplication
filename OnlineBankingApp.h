@@ -80,7 +80,6 @@ public:
 	void printDeets(); 
 	bool CorrectInfo();
 	void printPnames();
-	void printBalance();
 	bool primaryusage(); 
 
 private:

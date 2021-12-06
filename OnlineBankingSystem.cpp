@@ -61,8 +61,8 @@ int main()
            cout << "Printing your details...\n " << endl;
            cout << endl; 
            cout << mainAccount.accessName() << endl;
-           cout << "Your currnet Account balance is: " << char(156) << currentA.accessBal() << endl;
-           cout << "Your savings Account balance is:" << char(156) << savingsA.accessBal() << endl;
+           cout << "Your current account balance is: " << char(156) << currentA.accessBal() << endl;
+           cout << "Your savings account balance is:" << char(156) << savingsA.accessBal() << endl;
            cout <<"Your Overdraft limit is: " <<mainAccount.overdraftlim() << endl;
            cout << "\n";
            break;
@@ -143,8 +143,6 @@ int main()
                } while (currentA.Verified() == false);
 
                cout << "You have sent money to, " << Payees[choice].accessName() << endl;
-              // cout << "(only for purpose of the assignment) - Payees balance: ";
-               Payees[choice].printBalance();
                cout << mainAccount.accessName() << " your balance is " << char(156) << currentA.accessBal() << endl;
                break;
            }

@@ -133,14 +133,6 @@ void Payee::printPnames()
 	cout << endl;
 }
 
-//Adjusts and prints payee balance. 
-void Payee::printBalance()
-{	
-	Balance = dAmount + Balance;
-	cout << dAmount;
-	cout << Balance << endl; 
-}
-
 //Bool that validates the transfer function , (if any payee has been added or not).
 bool Payee::primaryusage()
 {	
