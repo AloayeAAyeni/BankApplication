@@ -125,6 +125,7 @@ int main()
            else
            {
                cout << "who would you like to transfer to" << endl;
+               // loop that cycles through all the payees that the user has entered and prints them to terminal. 
                for (int x = 1; x < i; x++)
                {
                    cout << x << ".";

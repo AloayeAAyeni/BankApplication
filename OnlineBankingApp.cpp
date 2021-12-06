@@ -4,8 +4,7 @@
 #include <sstream>
 
 using namespace std;
-// Fix error message for payee deets.
-// fix the "£-400" to show "-£400"
+
 
 Account::Account()
 {	 
@@ -35,7 +34,7 @@ void Account::loginDeets()
 		cout << "Enter your username. \n";
 		getline(cin, username); 
 		// removes the blank spaces from the string 'username' , incase of accidental input. 
-		username.erase(remove_if(username.begin(), username.end(), isspace), username.end()); 
+		username.erase(remove_if(username.begin(), username.end(), [](unsigned char x) {return isspace(x); }), username.end());
 		cout << "Enter your password. \n";
 		getline(cin, password);		
 
@@ -66,10 +65,10 @@ void Payee::getNames()
 	cout << "Please enter the Payee details " << endl;
 	cout << "First name: ";	
 	cin >> First_name; 
-	First_name.erase(remove_if(First_name.begin(), First_name.end(), isspace), First_name.end());
+	First_name.erase(remove_if(First_name.begin(), First_name.end(), [](unsigned char x) {return isspace(x); }), First_name.end());
 	cout << "Surname: "; 
 	cin >> Last_name; 
-	Last_name.erase(remove_if(Last_name.begin(), Last_name.end(), isspace), Last_name.end());
+	Last_name.erase(remove_if(Last_name.begin(), Last_name.end(), [](unsigned char x) {return isspace(x); }), Last_name.end());
 	name = First_name + " " + Last_name;	
 }
 
@@ -144,8 +143,8 @@ void Payee::printBalance()
 
 //Bool that validates the transfer function , (if any payee has been added or not).
 bool Payee::primaryusage()
-{
-	PrimaryUsage = true;
+{	
+	PrimaryUsage = false;
 	return PrimaryUsage; 
 }
 
@@ -169,21 +168,22 @@ string Account::accessName()
 	return name;
 }
 
-//Couts the final balance. 
+//Prints the final balance. 
 void Account::withdrawl()
 	{	
 		cout << "Your current balance is " << char(156) << finalAmount << endl;
 		cout << endl;
 	}
 
+//Requests the withdrawl amount , throws exception and prints error messages. 
 void Account::getWAmount()
 {
 	double x;
 	
-	for (;;)
+	for (;;) // loops forever
 	{
 		cout << "how much would you like to withdraw?" << endl;
-		if (cin >> x)
+		if (cin >> x) // checks if its formattable with a double
 		{
 			cout << endl;
 			if (x > 0)
@@ -197,11 +197,11 @@ void Account::getWAmount()
 				cout << "You cannot deposit a negative number" << endl;
 			}
 		}
-		else {
+		else { //  if not a number will ask to re input the number and clears the cin.
 			cout << endl;
 			cout << "Please enter a valid integer" << endl;
 			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); //Dumps the bad input.
 			cout << endl;
 		}
 	}
@@ -210,8 +210,9 @@ void Account::getWAmount()
 	
 }
 
+//Requests the transaction amount , throws exception and prints error messages. 
 double Account::getTAmount(double dAmount)
-{
+{// see get wAmount
 	double x;
 
 	for (;;)
@@ -240,23 +241,20 @@ double Account::getTAmount(double dAmount)
 	finalAmount = 0;
 }
 
-//double Account::accessWBal()
-//{
-//	return iBal;
-//}
-
+// access withdrawl amount. 
 double Account::accessWAmount()
 {
 	return wAmount;
 }
 
+// checks if the your account balance will be smaller than your overdraft limit. 
 void Account::CheckOverdraft()
 { 
 	
 	if (finalAmount > limitOverDraft)
 	
 	{
-		verified = true; 
+		verified = true; // booleean that allows the transaction to take place. 
 		Balance = finalAmount;		
 	}
 	else
@@ -264,15 +262,17 @@ void Account::CheckOverdraft()
 		cout << endl;
 		cout << "This transaction exceeds your overdraft limit. Your overdraft limit is : " << limitOverDraft << endl;
 		cout << "This transaction will leave your balance as : " << finalAmount << endl;			
-		verified = false; 
+		verified = false; // If boolean is false , flow control will send user back to requesting the amount. 
 	} 
 }
 
+// returns the overdraft limit. 
 double Account::overdraftlim()
 {	
 	return limitOverDraft;
 }
 
+//Calculate the final amount. 
 double Account::getFinalAmount()
 {	
 	finalAmount = 0;
@@ -288,13 +288,15 @@ double Account::getFinalAmount()
 	return finalAmount;
 } 
 
+// returns the boolean verified.
 bool Account::Verified()
 {
 	return verified;
 }
 
+// Does the deposit transaction , and prints the result. 
 void Account::deposit()
-{
+{// depending on the state of the boolean, will use different variables to do calculation.
 	if (IntialTrans == true)
 	{		
 		finalAmount = 0 + dAmount;
@@ -315,8 +317,9 @@ void Account::deposit()
 	}	
 }
 
+// Requests the transaction amount, throws exceptionand prints error messages.
 void Account::getDAmount()
-{
+{ // see get wAmount. 
 	double x;
 
 	for (;;)
@@ -349,6 +352,7 @@ void Account::getDAmount()
 	finalAmount = 0;
 }
 
+//Asks user if the Payee details are correct and chooses state of boolean depending on choice. 
 void Payee::correctDetails()
 {
 	int choice;
@@ -367,7 +371,7 @@ void Payee::correctDetails()
 	}
 }
 
-
+//current account contructor
 Current_Account::Current_Account(string Fn, string Ln, float Bal)
 {
 	First_name = name = Fn;
@@ -375,6 +379,7 @@ Current_Account::Current_Account(string Fn, string Ln, float Bal)
 	iBal = Bal;
 }
 
+//saving account constructor 
 Savings_Account::Savings_Account(string Fn, string Ln, float Bal)
 {
 	First_name = name = Fn;

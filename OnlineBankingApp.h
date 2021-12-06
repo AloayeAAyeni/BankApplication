@@ -9,9 +9,11 @@
 
 using std::string;
 
-// Parent class : Account
+// Parent class
 class Account {
+
 public: 
+
 	Account();
 	Account(string Fn, string Ln, float Bal = 0 );
 	
@@ -21,13 +23,10 @@ public:
 	double tAmount;	
 	double dAmount = 0;
 	double uDAmount;
-
+	
 	void loginDeets();
-	//string getname();	
-
 	double accessBal(); 
 	string accessName(); 
-
 	void withdrawl();
 	void getWAmount(); 
 	double getTAmount(double dAmount);
@@ -38,30 +37,22 @@ public:
 	bool Verified(); 	
 	void deposit();
 	void getDAmount();
-	//void moveMinusToFront(char str[]);
+	
 protected:
+
 	double iBal;
 	double Balance = 0;
 
 private:
-	double finalAmount = 0;
-	
 
-	//withdrawlTrans
-	
+	double finalAmount = 0;
 	const double limitOverDraft = -1000;
 	bool verified; 
-	
-	//DepositTrans
 	double dBal;
-	
-
-	// all transactions
-	
 	bool IntialTrans = true;
-
 };
 
+//Derived class
 class Current_Account : public Account
 {
 public:
@@ -69,6 +60,7 @@ public:
 private:
 };
 
+//Derived class
 class Savings_Account : public Account
 {
 public:
@@ -76,8 +68,9 @@ public:
 private:
 };
 
+//Derived class
 class Payee : public Account {
-	// all seperate account other than main go here
+	
 public:
 
 	void correctDetails();
